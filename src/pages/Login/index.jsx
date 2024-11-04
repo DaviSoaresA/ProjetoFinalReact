@@ -6,32 +6,30 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.get(
-        `https://6722c0412108960b9cc5775c.mockapi.io/login`,
-        {
-          params: { email, password },
+    axios
+      .get(`https://6722c0412108960b9cc5775c.mockapi.io/login`, {
+        params: { email, password },
+      })
+      .then((response) => {
+        if (response.data.length > 0) {
+          alert("Login realizado com sucesso!");
+          setError("");
+        } else {
+          setError("Usuário ou senha inválidos");
         }
-      );
-
-      if (response.data.length > 0) {
-        alert("Login realizado com sucesso!");
-        setError("");
-      } else {
-        setError("Usuário ou senha inválidos");
-      }
-    } catch (err) {
-      if (err.response && err.response.status === 404) {
-        setError("Usuário ou senha inválidos");
-      } else if (err.response && err.response.status === 401) {
-        setError("Acesso não autorizado. Verifique suas credenciais.");
-      } else {
-        setError("Ocorreu um erro ao conectar-se ao servidor");
-      }
-    }
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 404) {
+          setError("Usuário ou senha inválidos");
+        } else if (err.response && err.response.status === 401) {
+          setError("Acesso não autorizado. Verifique suas credenciais.");
+        } else {
+          setError("Ocorreu um erro ao conectar-se ao servidor");
+        }
+      });
   };
 
   return (
