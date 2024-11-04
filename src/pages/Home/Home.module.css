@@ -3,22 +3,55 @@
     margin: 0 auto;
 }
 
-.title {
+.titulo, .tituloDois, .tituloTres {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
     margin: 25px 0 10px 0;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #000000;
+    margin-bottom: 10px;
+    margin-top: 30px;
 }
 
-.slideContainer {
+.subtitulo {
+    margin-top: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 1.4rem;
+    color: #2366e0;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.texto {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    text-align: justify;
+    line-height: 1.5;
+    font-size: 1.2rem;
+    color: #000000;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.slideSection {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.swiperContainer {
+    width: 70%;
+    margin: 0 auto;
     position: relative;
 }
 
 .slideItem {
     width: 650px;
-    height: 350px; 
+    height: 350px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 10px #000000;
     display: block;
     margin: 0 auto;
     object-fit: cover;
@@ -26,17 +59,34 @@
 
 .legenda {
     position: absolute;
-    bottom: 10px; 
-    left: 50%; 
-    transform: translateX(-50%); 
+    bottom: 10px;
+    left: 50%;
     background-color: rgba(0, 0, 0, 0.5);
     color: #ffffff;
     padding: 5px 10px;
     border-radius: 3px;
     font-size: 1.6rem;
     text-align: center;
+    transform: translateX(-50%); /* Centra o texto horizontalmente */
 }
 
-h1 {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.objetivo {
+    margin-top: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: justify;
+    line-height: 1.5;
+    font-size: 1.2rem;
+    color: #000000;
+    margin-bottom: 0;
+}
+
+.descricao {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    text-align: justify;
+    line-height: 1.5;
+    font-size: 1.0rem;
+    color: #000000;
+    margin-top: 0;
 }
