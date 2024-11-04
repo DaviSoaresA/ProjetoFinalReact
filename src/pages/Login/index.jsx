@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styles from "./Login.module.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -55,7 +56,8 @@ const Login = () => {
                 setEmail("");
                 setPassword("");
                 setPasswordC("");
-                setError("");
+                setError("Usuário cadastrado com sucesso!");
+                setCadastro(false);
               });
           } else {
             setError("Senhas não coincidem, favor verificar");
@@ -67,45 +69,58 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className={styles.loginContainer}>
       <h2>Login</h2>
-      <form onSubmit={!cadastro ? handleLogin : handleRegister}>
-        <div>
+      <form
+        onSubmit={!cadastro ? handleLogin : handleRegister}
+        className={styles.form}
+      >
+        <div className={styles.inputGroup}>
           <label>Email:</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            className={styles.input}
           />
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label>Senha:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className={styles.input}
           />
         </div>
         {!cadastro ? (
           ""
         ) : (
-          <div>
-            <label>Confirmar senha:</label>
+          <div className={styles.inputGroup}>
+            <label className={styles.label}>Confirmar senha:</label>
             <input
               type="password"
               value={passwordC}
               onChange={(e) => setPasswordC(e.target.value)}
               required
+              className={styles.input}
             />
           </div>
         )}
-
-        <button type="submit">{cadastro ? "Cadastrar" : "Entrar"}</button>
+        <button type="submit" className={styles.submitButton}>
+          {cadastro ? "Cadastrar" : "Entrar"}
+        </button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <button onClick={() => setCadastro(!cadastro)}>
+      {error && <p className={styles.message}>{error}</p>}
+      <button
+        onClick={() => {
+          setCadastro(!cadastro);
+          setError("");
+        }}
+        className={styles.toggleButton}
+      >
         {cadastro ? "Fazer login" : "Não tem uma conta? Cadastre-se"}
       </button>
     </div>
