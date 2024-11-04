@@ -5,6 +5,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [cadastro, setCadastro] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -57,6 +58,24 @@ const Login = () => {
         <button type="submit">Entrar</button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
+      <button onClick={() => setCadastro(!cadastro)}>
+        {cadastro ? "trocar para login" : "trocar para cadastro"}
+      </button>
+      <button
+        onClick={() => {
+          axios
+            .post("https://6722c0412108960b9cc5775c.mockapi.io/login", {
+              email,
+              password,
+            })
+            .then(() => {
+              setEmail("");
+              setPassword("");
+            });
+        }}
+      >
+        teste cadastro
+      </button>
     </div>
   );
 };
