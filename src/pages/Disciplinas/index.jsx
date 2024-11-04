@@ -1,8 +1,7 @@
 import React from 'react'
 
-export default function index() {
+export default function Disciplinas() {
   return (
     <div>Disciplinas</div>
   )
 }
-

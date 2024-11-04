@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as styles from "./Contador.module.css";
 
 //States - estados do contador
-const Pomodoro = () => {
+export default function Contador() {
     const [time, setTime] = useState(25 * 60); // armazena o tempo iniciando em 25 minutos
     const [isActive, setIsActive] = useState(false); //controla se o temporiador está ativo inciando em false
     const [mode, setMode] = useState("Pomodoro"); // indica o modo atual do temporizador entre as 3 possibilidades
@@ -110,4 +110,6 @@ const Pomodoro = () => {
     );
 };
 
-export default Pomodoro;
+
+
+

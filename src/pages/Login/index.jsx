@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Contato() {
+export default function Login() {
   return (
     <div>Login</div>
   )

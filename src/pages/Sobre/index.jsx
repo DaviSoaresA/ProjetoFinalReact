@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Sobre.module.css";
 
-const Sobre = () => {
+export default function Sobre() {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>
@@ -108,5 +108,3 @@ const Sobre = () => {
         </div>
     );
 };
-
-export default Sobre;
