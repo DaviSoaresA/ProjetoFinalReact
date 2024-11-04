@@ -2,14 +2,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    background-color: #2d3e50;
-    color: #fff;
+    padding: 2rem;
+    background-color: #020c17;
+    color: #f3f0f0;
 }
 
 .header nav a {
     margin: 0 10px;
-    color: #fff;
+    color: #085913;
     text-decoration: none;
 }
 
