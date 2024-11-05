@@ -55,9 +55,9 @@ export default function Disciplinas() {
           <main className={styles.dmain}>
             <form className={styles.dform} onSubmit={handleSubmit(addPost)}>
               <header className={styles.dfheader}>
-                <h1>Adicione uma nova Disciplina</h1>
+                <h1>Adicione uma nova Disciplina: </h1>
               </header>
-              <div className={styles.dline}></div>
+              <div className={styles.dlineTwo}></div>
               <div className={styles.dfField}>
                 <label htmlFor="titulo">Título da Disciplina:</label>
                 <input
@@ -102,7 +102,7 @@ export default function Disciplinas() {
             {disciplinas.map((d, key) => (
               <div className={styles.dcard} key={key}>
                 <header className={styles.dcard__header}>
-                  <h2>{d.nome}</h2>
+                  <h2>{d.titulo}</h2>
                 </header>
                 <div className={styles.dline}></div>
                 <div className={styles.dcard__main}>
@@ -113,7 +113,7 @@ export default function Disciplinas() {
                   <h4>{d.cargaHoraria}Hr</h4>
                   <Link to={"/contador"}>
                     <button className={styles.dbutton}>
-                      Começe a Estudar!
+                      Comece a Estudar!
                     </button>
                   </Link>
                 </footer>

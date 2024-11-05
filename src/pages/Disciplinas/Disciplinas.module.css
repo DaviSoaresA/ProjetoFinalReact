@@ -1,26 +1,29 @@
 .dcard{
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
     flex-direction: column;
-    background: radial-gradient(70% 70%, #b3f3b3, #73a373, #437343);
-    width: 250px;
-    height: 350px;
-    box-shadow: 1px -1px 6px 1px #000;
-    border: #000 solid 1px;
+    justify-content: space-between;
+    align-items: center;
+    background: radial-gradient(70% 70%, #bde2ff, #83b8e4, steelblue);
+    width: 200px;
+    height: 300px;
+    border: solid 2px #1c1c1c;
     border-radius: 15px;
     box-sizing: border-box;
 }
 
 .dline{
     width: 90%;
-    border: 3px solid #206020;
-    border-radius: 3px;
+    border: 1px solid #1c1c1c;
+}
+.dlineTwo{
+    width: 90%;
+    border: 1px dashed #1c1c1c;
+    margin-bottom: 15px;
 }
 
 .dcard__header{
     text-align: center;
-    font-size: 1.15em;
+    font-size: 1.2rem;
     margin: 0;
     padding: 0;
 }
@@ -32,75 +35,80 @@
 }
 
 .dcard__main{
-    text-align: justify;
-    font-size: 0.70em;
+    text-align: center;
+    font-size: 1.0rem;
     margin: 0;
-    padding: 0 3px;
+    padding: 0;
 }
 
 .dmain{
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
 }
 
 .dbutton{
-    background-color: #1525a5;
-    border-radius: 20px;
-    box-shadow: 0.5px 0.5px 5px 1px #00aaff;
-    color: #10f5f4;
-    padding: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px 20px;
+    margin: 10px 10px;
+    font-size: 1.0rem;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #041b32;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #000000;
+    
 }
 
-.dbutton :hover{
-    cursor: pointer;
-    background-color: #1565e5;
-    border-radius: 20px;
-    box-shadow: 0.5px 0.5px 5px 1px #00ddff;
-    color: #90f5f4;
-    padding: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+.dbutton:hover{
+    background-color: seagreen;
 }
 
 .buttonArea{
     display: flex;
-    justify-content: space-evenly;
-    justify-items: center;
-    margin-bottom: 35px;
+    margin-bottom: 35px 0;
+    justify-content: center;
 }
 
-.dform{
+.dform {
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
     flex-direction: column;
-    background: linear-gradient(70% 70%, #b3f3b3, #73a373, #437343);
-    width: 60%;
-    height: 85%;
-    box-shadow: 2px;
-    border: #000 solid 1px;
+    align-items: center;
+    width: 65%;
+    height: 80%;
+    border: 1px solid #000000;
     border-radius: 15px;
-}
-
-.dfField{
+    padding: 20px;
+    margin: 3vw;
+    overflow: hidden;
+    background-color: #95dab3;
+  }
+  
+  .dfField {
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 100%;
-}
-
-.dfField > label{
-    position: relative;
-    right: 23%;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: bold;
-    padding: 5px;
-}
-
-.dfField > input{
+    margin-bottom: 15px;
+  }
+  
+  .dfField > label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.0rem;
+    color: #000000;
+    padding: 5px;    
+    margin-bottom: 5px;
+  }
+  
+  .dfField > input {
     margin: 5px;
-    width: 70%;
-    height: 30px;
+    width: 80%;
+    height: 35px;
     border-radius: 10px;
-}
+    border: 1px solid steelblue;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
