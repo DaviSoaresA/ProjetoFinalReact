@@ -28,12 +28,8 @@ export default function Disciplinas() {
   }, []);
 
   const addPost = (data) => {
-    const newpost = {
-      nome: data.titulo,
-      descricao: data.descricao,
-    };
     axios
-      .post("https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas", newpost)
+      .post("https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas", data)
       .then(() => {
         setDisc(true);
         listarDisciplinas();
