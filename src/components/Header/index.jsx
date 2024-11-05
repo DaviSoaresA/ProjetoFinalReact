@@ -1,22 +1,37 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import * as styles from "./Header.module.css";
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = (path) => {
+    if (location.pathname !== path) {
+    }
+  };
+
   return (
     <header className={styles.header}>
       <div>
-        <h1> Contador de Tempo de Estudo </h1>
-
-        <Link to="/"> Home </Link>
-        <p></p>
-        <Link to="/login"> Login </Link>
-        <p></p>
-        <Link to="/disciplinas"> Disciplinas </Link>
-        <p></p>
-        <Link to="/contador"> Contador </Link>
-        <p></p>
-        <Link to="/sobre"> Sobre </Link>
+        <div className={styles.menuIcon} onClick={toggleMenu}>
+          ☰
+        </div>
+        <nav className={`${styles.nav} ${isMenuOpen ? styles.active : ""}`}>
+          <Link to="/" onClick={() => closeMenu("/")}>Home</Link>
+          <p></p>
+          <Link to="/login" onClick={() => closeMenu("/login")}>Login</Link>
+          <p></p>
+          <Link to="/disciplinas" onClick={() => closeMenu("/disciplinas")}>Disciplinas</Link>
+          <p></p>
+          <Link to="/contador" onClick={() => closeMenu("/contador")}>Contador</Link>
+          <p></p>
+          <Link to="/sobre" onClick={() => closeMenu("/sobre")}>Sobre</Link>
+        </nav>
       </div>
     </header>
   );
