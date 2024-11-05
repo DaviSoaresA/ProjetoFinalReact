@@ -9,6 +9,7 @@
     box-shadow: 1px -1px 6px 1px #000;
     border: #000 solid 1px;
     border-radius: 15px;
+    box-sizing: border-box;
 }
 
 .dline{
@@ -20,22 +21,21 @@
 .dcard__header{
     text-align: center;
     font-size: 1.15em;
-    margin: auto;
-    padding: auto;
+    margin: 0;
+    padding: 0;
 }
 
 .dcard__footer{
     text-align: center;
-    font-size: 1em;
-    margin: auto;
-    padding: auto;
+    margin: 0;
+    padding: 0;
 }
 
 .dcard__main{
     text-align: justify;
-    font-size: 1em;
+    font-size: 0.70em;
     margin: 0;
-    padding: 3px;
+    padding: 0 3px;
 }
 
 .dmain{
@@ -46,11 +46,20 @@
 
 .dbutton{
     background-color: #1525a5;
-    border-radius: 5px;
+    border-radius: 20px;
     box-shadow: 0.5px 0.5px 5px 1px #00aaff;
     color: #10f5f4;
     padding: 10px;
-    margin: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.dbutton :hover{
+    cursor: pointer;
+    background-color: #1565e5;
+    border-radius: 20px;
+    box-shadow: 0.5px 0.5px 5px 1px #00ddff;
+    color: #90f5f4;
+    padding: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -58,6 +67,7 @@
     display: flex;
     justify-content: space-evenly;
     justify-items: center;
+    margin-bottom: 35px;
 }
 
 .dform{

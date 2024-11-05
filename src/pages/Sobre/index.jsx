@@ -63,7 +63,6 @@ export default function Sobre() {
           chance de esquecimento. Existem aplicativos como Anki que ajudam a
           aplicar essa técnica automaticamente.
         </p>
-
         <h2 className={styles.subtitle}>
           Sites com Conteúdo sobre Técnicas e Metodologias de Estudo
         </h2>
