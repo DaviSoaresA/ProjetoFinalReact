@@ -70,38 +70,38 @@ const Sobre = () => {
             <ul className={styles.list}>
                 <li className={styles.listItem}>
                     <a
-                        href="https://www.nucleoensino.usp.br/"
+                        href="https://ufpi.br/arquivos_download/arquivos/Parnaiba/2021/Guia_de_Estudos_UFDPar_-_SEPE-PRAEC.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Núcleo de Ensino da USP
+                        Universidade Federal do Piauí - Guia de Técnicas de Estudo
                     </a>
                 </li>
                 <li className={styles.listItem}>
                     <a
-                        href="https://www.youtube.com/channel/UCY0OT85HL0a_k4u0V1FzFNA"
+                        href="https://guiadoestudante.abril.com.br/estudo/como-fazer-um-mapa-mental/"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Estude com Eficiência
+                        Guia do Estudante - Como fazer um mapa mental
                     </a>
                 </li>
                 <li className={styles.listItem}>
                     <a
-                        href="https://www.mindtools.com/"
+                        href="https://querobolsa.com.br/revista/organizacao-de-estudos"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        MindTools
+                        Revista Quero - Organização de estudos
                     </a>
                 </li>
                 <li className={styles.listItem}>
                     <a
-                        href="https://www.estudopratico.com.br/"
+                        href="https://fepi.br/gestao-de-tempo-dicas-para-otimizar-seus-estudos/"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Estudo Prático
+                        Centro Universitário de Itajubá - Gestão de tempo para otimizar os estudos
                     </a>
                 </li>
             </ul>
