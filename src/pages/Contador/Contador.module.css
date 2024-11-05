@@ -1,0 +1,71 @@
+/* Pomodoro.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #fff;
+    color: #0269bd;
+}
+
+.title {
+
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #0269bd;
+}
+
+.subtitle{
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #0269bd;
+}
+
+.paragraph{
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: center;
+    color: #63b0f0;
+}
+.timer {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #0269bd;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button {
+    background-color: #0269bd;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.button > startTimer{
+    background-color: #05c750;
+    font-weight: bold;
+}
+
+.button > pauseTimer{
+    color: #f10606;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #05c750;
+}
