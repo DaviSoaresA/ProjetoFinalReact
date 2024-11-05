@@ -13,19 +13,21 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .get(`https://6722c0412108960b9cc5775c.mockapi.io/login`, {
-        params: { email, password },
-      })
+      .post(`http://localhost:8080/login`, { email: email, password: password })
       .then((response) => {
-        if (response.data.length > 0) {
-          alert("Login realizado com sucesso!");
-          setError("");
-        }
+        const token = response.headers["authorization"];
+        // if (response.data.length > 0) {
+        alert("Login realizado com sucesso!");
+        console.log(token);
+
+        setError("");
+        // }
       })
       .catch((err) => {
-        if (err.response && err.response.status === 404) {
+        if (err.response && err.response.status === 401) {
           setError("Usuário ou senha inválidos");
         } else {
+          console.log({ email, password });
           setError("Ocorreu um erro ao conectar-se ao servidor");
         }
       });
@@ -35,33 +37,22 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .get("https://6722c0412108960b9cc5775c.mockapi.io/login", {
-        params: { email },
+      .post("http://localhost:8080/user", {
+        email,
+        senha: password,
+        confirmaSenha: passwordC,
       })
-      .then((response) => {
-        if (response.data.length > 0) {
-          setError("Email já existente");
-        }
+      .then(() => {
+        setEmail("");
+        setPassword("");
+        setPasswordC("");
+        setError("Usuário cadastrado com sucesso!");
+        setCadastro(false);
       })
       .catch((err) => {
-        if (err.response && err.response.status === 404) {
-          setError("");
-          if (!(password != passwordC)) {
-            axios
-              .post("https://6722c0412108960b9cc5775c.mockapi.io/login", {
-                email,
-                password,
-              })
-              .then(() => {
-                setEmail("");
-                setPassword("");
-                setPasswordC("");
-                setError("Usuário cadastrado com sucesso!");
-                setCadastro(false);
-              });
-          } else {
-            setError("Senhas não coincidem, favor verificar");
-          }
+        if (err.response.status === 422) {
+          setError(err.response.data);
+          console.log(err.response.data);
         } else {
           setError("Ocorreu um erro ao conectar-se ao servidor");
         }
