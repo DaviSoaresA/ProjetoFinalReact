@@ -10,6 +10,7 @@
     color: steelblue;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
+    margin-top: 0;
 }
 
 .subtitle{
@@ -17,7 +18,7 @@
     font-size: 1.2rem;
     color: #000000;
     text-align: center;
-    margin-top: 25px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 

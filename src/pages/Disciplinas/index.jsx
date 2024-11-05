@@ -39,7 +39,7 @@ export default function Disciplinas() {
 
   return (
     <div>
-      <Header />
+ <Header />
       <div className={styles.buttonArea}>
         <button className={styles.dbutton} onClick={() => setDisc(true)}>
           Disciplinas Existentes
