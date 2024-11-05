@@ -108,4 +108,3 @@ export default function Sobre() {
         </div>
     );
 };
->>>>>>> 9fc819133083163881033c2553c6edfba24a78bd

@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import * as styles from "./Disciplinas.module.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Disciplinas() {
   const [disciplinas, setDisciplinas] = useState([]);
@@ -61,7 +62,7 @@ export default function Disciplinas() {
                 type="text"
                 name="titulo"
                 id="titulo"
-                maxLength="65"
+                maxLength="100"
                 {...register("titulo")}
               />
             </div>
@@ -71,8 +72,18 @@ export default function Disciplinas() {
                 type="text"
                 name="descricao"
                 id="descricao"
-                maxLength="500"
+                maxLength="200"
                 {...register("descricao")}
+              />
+            </div>
+            <div className={styles.dfField}>
+              <label htmlFor="cargaHoraria">Carga horária da Disciplina:</label>
+              <input
+                type="number"
+                name="cargaHoraria"
+                id="cargaHoraria"
+                maxLength="10"
+                {...register("cargaHoraria")}
               />
             </div>
             <button type="submit" className={styles.dbutton}>
@@ -84,8 +95,8 @@ export default function Disciplinas() {
 
       {disc && (
         <main className={styles.dmain}>
-          {disciplinas.map((d) => (
-            <div className={styles.dcard} key={d.id}>
+          {disciplinas.map((d, key) => (
+            <div className={styles.dcard} key={key}>
               <header className={styles.dcard__header}>
                 <h2>{d.nome}</h2>
               </header>
@@ -95,7 +106,10 @@ export default function Disciplinas() {
               </div>
               <div className={styles.dline}></div>
               <footer className={styles.dcard__footer}>
-                <h3>&copy; 2024 - Grupo 5</h3>
+                <h4>{d.cargaHoraria}Hr</h4>
+                <Link to={"/contador"}>
+                  <button className={styles.dbutton}>Começe a Estudar!</button>
+                </Link>
               </footer>
             </div>
           ))}
