@@ -10,17 +10,17 @@ export default function Contador() {
   const [isActive, setIsActive] = useState(false); //controla se o temporiador está ativo inciando em false
   const [mode, setMode] = useState("Pomodoro"); // indica o modo atual do temporizador entre as 3 possibilidades
 
-  // função para formatar o tempo
-  const formatTime = (time) => {
-    // Formato MM:ss
-    const minutes = Math.floor(time / 60); //retorna o maior inteiro menor que o argumento, no caso, minutos.
-    const seconds = time % 60; //calcula o resto da divisãopara para os segundos
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
-      2,
-      "0"
-    )}`;
-    //padStart formata minutos e segundos sempre com dois dígitos e arrendonda para 0
-  };
+
+    // função para formatar o tempo
+    const formatTime = (time) => {
+        // Formato MM:ss
+        const minutes = Math.floor(time / 60); //retorna o maior inteiro menor que o argumento, no caso, minutos.
+        const seconds = time % 60; //calcula o resto da divisãopara para os segundos
+        return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2,"0")}`;
+        //padStart formata minutos e segundos sempre com dois dígitos e arrendonda para 0
+    };
+
+
 
   // funções que definem cada modo de contador
   const startPomodoro = () => {

@@ -55,7 +55,6 @@ export default function Sobre() {
           mental e facilita a retenção, pois seu cérebro se mantém engajado com
           novos conteúdos.
         </p>
-
         <h2 className={styles.subtitle}>5. Revisão Espaçada</h2>
         <p className={styles.paragraph}>
           A revisão espaçada consiste em revisar o conteúdo em intervalos
@@ -114,3 +113,4 @@ export default function Sobre() {
     </div>
   );
 }
+
