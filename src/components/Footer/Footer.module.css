@@ -1,9 +1,20 @@
 .footer {
-    padding: 3rem;
-    background-color: #020c17;
-    color: #f3f0f0;
-    text-align: center;
-    position: fixed;
+    position: relative;
     width: 100%;
-    bottom: 0;
+    background-color: #333333;
+    color: #ffffff; 
+    text-align: center;
+    padding: 5px 0;
+    font-size: 0.7rem;
+    margin-top: 30px;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+@media (max-width: 700px) {
+    .footer {
+        font-size: 0.6rem;
+    }
 }
