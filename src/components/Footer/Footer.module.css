@@ -12,6 +12,15 @@
 .footer p {
     margin: 5px 0;
 }
+.icon a  {
+    padding: 5px;
+    color: #ffffff;
+}
+
+.icon a:hover {
+    color: #0269bd;
+}
+
 
 @media (max-width: 700px) {
     .footer {
