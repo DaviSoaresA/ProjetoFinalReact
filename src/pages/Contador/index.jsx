@@ -78,7 +78,7 @@ export default function Contador() {
   return (
     <div className="header-footer">
       <Header />
-      <div className={`${globalStyles.container} ${styles.container}`}>
+      <div className={globalStyles.container}>
         <h1 className={styles.title}>Pomodoro Timer</h1>
         <h3 className={styles.subtitle}>Você conhece o método Pomodoro?</h3>
         <p className={styles.paragraph}>
@@ -89,6 +89,7 @@ export default function Contador() {
           para evitar a fadiga e manter o foco por mais tempo.
         </p>
         <h2 className={styles.timer}>{formatTime(time)}</h2>
+        <div className={styles.allButtonsContainer}>
         <div className={styles.buttonGroup}>
           <button onClick={startPomodoro} className={styles.button}>
             Pomodoro
@@ -111,6 +112,7 @@ export default function Contador() {
             Reset
           </button>
         </div>
+      </div>
       </div>
       <Footer />
     </div>
