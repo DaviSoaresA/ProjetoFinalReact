@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import styles from "./Login.module.css";
+import * as styles from "./Login.module.css";
+import * as globalStyles from "../../styles/Global.module.css";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -69,14 +72,17 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.loginContainer}>
+    <div className="header-footer">
+      <Header />
+    <div className={globalStyles.container}>
+      <div className={styles.loginContainer}>
       <h2>Login</h2>
       <form
         onSubmit={!cadastro ? handleLogin : handleRegister}
         className={styles.form}
       >
         <div className={styles.inputGroup}>
-          <label>Email:</label>
+          <label className={styles.label}>Email:</label>
           <input
             type="email"
             value={email}
@@ -86,7 +92,7 @@ const Login = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label>Senha:</label>
+          <label className={styles.label}>Senha:</label>
           <input
             type="password"
             value={password}
@@ -123,6 +129,9 @@ const Login = () => {
       >
         {cadastro ? "Fazer login" : "Não tem uma conta? Cadastre-se"}
       </button>
+    </div>
+    </div>
+    <Footer/>
     </div>
   );
 };

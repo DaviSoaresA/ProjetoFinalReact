@@ -40,7 +40,7 @@ export default function Disciplinas() {
   };
 
   return (
-    <div>
+    <div className="header-footer">
       <Header />
       <div className={globalStyles.container}>
         <div className={styles.buttonArea}>
