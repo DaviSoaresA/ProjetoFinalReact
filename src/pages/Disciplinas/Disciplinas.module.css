@@ -1,0 +1,96 @@
+.dcard{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background: radial-gradient(70% 70%, #b3f3b3, #73a373, #437343);
+    width: 250px;
+    height: 350px;
+    box-shadow: 1px -1px 6px 1px #000;
+    border: #000 solid 1px;
+    border-radius: 15px;
+}
+
+.dline{
+    width: 90%;
+    border: 3px solid #206020;
+    border-radius: 3px;
+}
+
+.dcard__header{
+    text-align: center;
+    font-size: 1.15em;
+    margin: auto;
+    padding: auto;
+}
+
+.dcard__footer{
+    text-align: center;
+    font-size: 1em;
+    margin: auto;
+    padding: auto;
+}
+
+.dcard__main{
+    text-align: justify;
+    font-size: 1em;
+    margin: 0;
+    padding: 3px;
+}
+
+.dmain{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.dbutton{
+    background-color: #1525a5;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 5px 1px #00aaff;
+    color: #10f5f4;
+    padding: 10px;
+    margin: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.buttonArea{
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: center;
+}
+
+.dform{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background: linear-gradient(70% 70%, #b3f3b3, #73a373, #437343);
+    width: 60%;
+    height: 85%;
+    box-shadow: 2px;
+    border: #000 solid 1px;
+    border-radius: 15px;
+}
+
+.dfField{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dfField > label{
+    position: relative;
+    right: 23%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.dfField > input{
+    margin: 5px;
+    width: 70%;
+    height: 30px;
+    border-radius: 10px;
+}
