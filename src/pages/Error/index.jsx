@@ -1,14 +1,25 @@
 import React from "react";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import * as styles from "./Error.module.css";
+import { Link } from "react-router-dom";
+import errorIcon from "/src/assets/error-icon.svg";
+import styles from "./Error.module.css";
 
 export default function Error() {
   return (
-    <div>
-      <Header />
-      <h1> Erro 404 - Página não encontrada - </h1>
-      <Footer />
+    <div className={styles.error}>
+      <div className={styles.errorContent}>
+        <img src={errorIcon} alt="Erro" className={styles.errorIcon} />
+        <h1 className={styles.title}> Oops! </h1>
+        <p className={styles.message}> Erro 404 - Página não encontrada </p>
+        <p className={styles.message}>
+          {" "}
+          Desculpe, mas a página que você está procurando não existe ou não está
+          disponível no momento.{" "}
+        </p>
+        <Link to="/" className={styles.errorButton}>
+          {" "}
+          Voltar para a Home{" "}
+        </Link>
+      </div>
     </div>
   );
 }
