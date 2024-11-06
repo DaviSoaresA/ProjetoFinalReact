@@ -105,7 +105,7 @@ export default function Home() {
 
           <section className={styles.advantages}>
             <h1 className={styles.titleThree}>
-              Vantagens de estudar de forma organizada:
+              Vantagens de estudar de forma organizada
             </h1>
             <div className={styles.paragraph}>
               <h3 className={styles.goal}>
