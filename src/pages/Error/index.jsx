@@ -13,7 +13,7 @@ export default function Error() {
         <p className={styles.message}>
           {" "}
           Desculpe, mas a página que você está procurando não existe ou não está
-          disponível no momento.{" "}
+          disponível no momento...reclama com professor Roni.{" "}
         </p>
         <Link to="/" className={styles.errorButton}>
           {" "}
