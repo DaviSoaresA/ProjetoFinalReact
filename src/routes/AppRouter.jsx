@@ -11,7 +11,6 @@ import Sobre from "../pages/Sobre";
 export default function AppRouter() {
     return (
         <Routes>
-            
             <Route path="/" element={<Home />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/disciplinas" element={<Disciplinas />}></Route>
