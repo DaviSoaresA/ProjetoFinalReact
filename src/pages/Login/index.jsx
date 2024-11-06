@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
-import * as styles from "./Login.module.css";
+import styles from "./Login.module.css";
 import * as globalStyles from "../../styles/Global.module.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/user";
 
 const Login = () => {
+  const { token, setToken } = useContext(UserContext);
+  let navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordC, setPasswordC] = useState("");
@@ -16,19 +21,20 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .get(`https://6722c0412108960b9cc5775c.mockapi.io/login`, {
-        params: { email, password },
+      .post(`https://apireact-214173757800.herokuapp.com/login`, {
+        email: email,
+        password: password,
       })
       .then((response) => {
-        if (response.data.length > 0) {
-          alert("Login realizado com sucesso!");
-          setError("");
-        }
+        setToken(response.headers["authorization"]);
+        navigate("/disciplinas");
+        setError("");
       })
       .catch((err) => {
-        if (err.response && err.response.status === 404) {
+        if (err.response && err.response.status === 401) {
           setError("Usuário ou senha inválidos");
         } else {
+          console.log({ email, password });
           setError("Ocorreu um erro ao conectar-se ao servidor");
         }
       });
@@ -38,33 +44,22 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .get("https://6722c0412108960b9cc5775c.mockapi.io/login", {
-        params: { email },
+      .post("https://apireact-214173757800.herokuapp.com/user", {
+        email,
+        senha: password,
+        confirmaSenha: passwordC,
       })
-      .then((response) => {
-        if (response.data.length > 0) {
-          setError("Email já existente");
-        }
+      .then(() => {
+        setEmail("");
+        setPassword("");
+        setPasswordC("");
+        setError("Usuário cadastrado com sucesso!");
+        setCadastro(false);
       })
       .catch((err) => {
-        if (err.response && err.response.status === 404) {
-          setError("");
-          if (!(password != passwordC)) {
-            axios
-              .post("https://6722c0412108960b9cc5775c.mockapi.io/login", {
-                email,
-                password,
-              })
-              .then(() => {
-                setEmail("");
-                setPassword("");
-                setPasswordC("");
-                setError("Usuário cadastrado com sucesso!");
-                setCadastro(false);
-              });
-          } else {
-            setError("Senhas não coincidem, favor verificar");
-          }
+        if (err.response.status === 422) {
+          setError(err.response.data);
+          console.log(err.response.data);
         } else {
           setError("Ocorreu um erro ao conectar-se ao servidor");
         }
@@ -74,64 +69,64 @@ const Login = () => {
   return (
     <div className="header-footer">
       <Header />
-    <div className={globalStyles.container}>
-      <div className={styles.loginContainer}>
-      <h2>Login</h2>
-      <form
-        onSubmit={!cadastro ? handleLogin : handleRegister}
-        className={styles.form}
-      >
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className={styles.input}
-          />
+      <div className={globalStyles.container}>
+        <div className={styles.loginContainer}>
+          <h2>Login</h2>
+          <form
+            onSubmit={!cadastro ? handleLogin : handleRegister}
+            className={styles.form}
+          >
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>Email:</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>Senha:</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className={styles.input}
+              />
+            </div>
+            {!cadastro ? (
+              ""
+            ) : (
+              <div className={styles.inputGroup}>
+                <label className={styles.label}>Confirmar senha:</label>
+                <input
+                  type="password"
+                  value={passwordC}
+                  onChange={(e) => setPasswordC(e.target.value)}
+                  required
+                  className={styles.input}
+                />
+              </div>
+            )}
+            <button type="submit" className={styles.submitButton}>
+              {cadastro ? "Cadastrar" : "Entrar"}
+            </button>
+          </form>
+          {error && <p className={styles.message}>{error}</p>}
+          <button
+            onClick={() => {
+              setCadastro(!cadastro);
+              setError("");
+            }}
+            className={styles.toggleButton}
+          >
+            {cadastro ? "Fazer login" : "Não tem uma conta? Cadastre-se"}
+          </button>
         </div>
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Senha:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </div>
-        {!cadastro ? (
-          ""
-        ) : (
-          <div className={styles.inputGroup}>
-            <label className={styles.label}>Confirmar senha:</label>
-            <input
-              type="password"
-              value={passwordC}
-              onChange={(e) => setPasswordC(e.target.value)}
-              required
-              className={styles.input}
-            />
-          </div>
-        )}
-        <button type="submit" className={styles.submitButton}>
-          {cadastro ? "Cadastrar" : "Entrar"}
-        </button>
-      </form>
-      {error && <p className={styles.message}>{error}</p>}
-      <button
-        onClick={() => {
-          setCadastro(!cadastro);
-          setError("");
-        }}
-        className={styles.toggleButton}
-      >
-        {cadastro ? "Fazer login" : "Não tem uma conta? Cadastre-se"}
-      </button>
-    </div>
-    </div>
-    <Footer/>
+      </div>
+      <Footer />
     </div>
   );
 };

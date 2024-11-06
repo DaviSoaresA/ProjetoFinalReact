@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import * as styles from "./Disciplinas.module.css";
@@ -6,8 +6,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import * as globalStyles from "../../styles/Global.module.css";
+import { UserContext } from "../../contexts/user";
 
 export default function Disciplinas() {
+  const { token, setToken } = useContext(UserContext);
   const [id, setId] = useState(0);
 
   const [disciplinas, setDisciplinas] = useState([]);
@@ -24,7 +26,11 @@ export default function Disciplinas() {
 
   const listarDisciplinas = () => {
     axios
-      .get("https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas")
+      .get("https://apireact-214173757800.herokuapp.com/disciplina", {
+        headers: {
+          Authorization: token,
+        },
+      })
       .then((res) => {
         setDisciplinas(res.data);
       })
@@ -32,23 +38,35 @@ export default function Disciplinas() {
   };
 
   useEffect(() => {
-    listarDisciplinas();
-  }, []);
+    if (token) {
+      listarDisciplinas();
+    }
+  }, [token]);
 
   const addDisc = (data) => {
     axios
-      .post("https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas", data)
+      .post("https://apireact-214173757800.herokuapp.com/disciplina", data, {
+        headers: {
+          Authorization: token,
+        },
+      })
       .then(() => {
         setAdd(false);
         setExistDisc(true);
         listarDisciplinas();
       })
-      .catch(console.error("Erro no Post"));
+      .catch((error) => {
+        console.error("Erro na requisição", error);
+      });
   };
 
   const apagarDisc = (id) => {
     axios
-      .delete(`https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas/${id}`)
+      .delete(`https://apireact-214173757800.herokuapp.com/disciplina/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
       .then(() => {
         setSelectDelete(false);
         listarDisciplinas();
@@ -58,8 +76,13 @@ export default function Disciplinas() {
   const editDisc = (data) => {
     axios
       .put(
-        `https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas/${id}`,
-        data
+        `https://apireact-214173757800.herokuapp.com/disciplina/${id}`,
+        data,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
       )
       .then(() => {
         setExistDisc(true);
@@ -76,10 +99,20 @@ export default function Disciplinas() {
       <Header />
       <div className={globalStyles.container}>
         <div className={styles.buttonArea}>
-          <button className={styles.dbutton} onClick={() => {setAdd(false), setEdit(false), setExistDisc(true)}}>
+          <button
+            className={styles.dbutton}
+            onClick={() => {
+              setAdd(false), setEdit(false), setExistDisc(true);
+            }}
+          >
             Disciplinas Existentes
           </button>
-          <button className={styles.dbutton} onClick={() => {setAdd(true), setExistDisc(false), selectEdit(false)}}>
+          <button
+            className={styles.dbutton}
+            onClick={() => {
+              setAdd(true), setExistDisc(false), selectEdit(false);
+            }}
+          >
             Adicionar Disciplinas
           </button>
           <button
@@ -104,14 +137,14 @@ export default function Disciplinas() {
               </header>
               <div className={styles.dlineTwo}></div>
               <div className={styles.dfField}>
-                <label htmlFor="titulo">Título da Disciplina:</label>
+                <label htmlFor="nome">Título da Disciplina:</label>
                 <input
                   type="text"
-                  name="titulo"
-                  id="titulo"
+                  name="nome"
+                  id="nome"
                   maxLength="100"
-                  defaultValue={(disciplinas.find((d) => d.id === id).titulo)}
-                  {...register("titulo")}
+                  defaultValue={disciplinas.find((d) => d.id === id).nome}
+                  {...register("nome")}
                 />
               </div>
               <div className={styles.dfField}>
@@ -121,7 +154,7 @@ export default function Disciplinas() {
                   name="descricao"
                   id="descricao"
                   maxLength="200"
-                  defaultValue={(disciplinas.find((d) => d.id === id).descricao)}
+                  defaultValue={disciplinas.find((d) => d.id === id).descricao}
                   {...register("descricao")}
                 />
               </div>
@@ -134,7 +167,9 @@ export default function Disciplinas() {
                   name="cargaHoraria"
                   id="cargaHoraria"
                   maxLength="10"
-                  defaultValue={(disciplinas.find((d) => d.id === id).cargaHoraria)}
+                  defaultValue={
+                    disciplinas.find((d) => d.id === id).cargaHoraria
+                  }
                   {...register("cargaHoraria")}
                 />
               </div>
@@ -153,13 +188,13 @@ export default function Disciplinas() {
               </header>
               <div className={styles.dlineTwo}></div>
               <div className={styles.dfField}>
-                <label htmlFor="titulo">Título da Disciplina:</label>
+                <label htmlFor="nome">Título da Disciplina:</label>
                 <input
                   type="text"
-                  name="titulo"
-                  id="titulo"
+                  name="nome"
+                  id="nome"
                   maxLength="100"
-                  {...register("titulo")}
+                  {...register("nome")}
                 />
               </div>
               <div className={styles.dfField}>
@@ -196,12 +231,20 @@ export default function Disciplinas() {
             {disciplinas.map((d, key) => (
               <div className={styles.dcard} key={key}>
                 <header className={styles.dcard__header}>
-                  <h2>{d.titulo}</h2>
+                  <h2>{d.nome}</h2>
                   {selectEdit && (
-                    <input type="button" onClick={() => {setEdit(true), setAdd(false), setExistDisc(false), setId(d.id)}}/>
+                    <input
+                      type="button"
+                      onClick={() => {
+                        setEdit(true),
+                          setAdd(false),
+                          setExistDisc(false),
+                          setId(d.id);
+                      }}
+                    />
                   )}
                   {selectDelete && (
-                    <input type="button" onClick={() => apagarDisc(d.id)}/>
+                    <input type="button" onClick={() => apagarDisc(d.id)} />
                   )}
                 </header>
                 <div className={styles.dline}></div>
