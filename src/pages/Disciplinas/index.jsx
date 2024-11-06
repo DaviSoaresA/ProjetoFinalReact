@@ -102,7 +102,7 @@ export default function Disciplinas() {
           <button
             className={styles.dbutton}
             onClick={() => {
-              setAdd(false), setEdit(false), setExistDisc(true);
+              setAdd(false), setEdit(false), setExistDisc(true), setSelectDelete(false), setSelectEdit(false); 
             }}
           >
             Disciplinas Existentes
@@ -110,20 +110,20 @@ export default function Disciplinas() {
           <button
             className={styles.dbutton}
             onClick={() => {
-              setAdd(true), setExistDisc(false), selectEdit(false);
+              setAdd(true), setExistDisc(false), selectEdit(false), setSelectDelete(false), setSelectEdit(false);
             }}
           >
             Adicionar Disciplinas
           </button>
           <button
             className={styles.dbutton}
-            onClick={() => setSelectEdit(true)}
+            onClick={() => {setSelectEdit(!selectEdit), setSelectDelete(false)}}
           >
             Editar Disciplina
           </button>
           <button
             className={styles.dbutton}
-            onClick={() => setSelectDelete(true)}
+            onClick={() => {setSelectDelete(!selectDelete), setSelectEdit(false)}}
           >
             Apagar Disciplina
           </button>
