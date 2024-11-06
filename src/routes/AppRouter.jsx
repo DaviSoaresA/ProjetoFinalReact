@@ -16,6 +16,7 @@ export default function AppRouter() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/disciplinas" element={<Disciplinas />}></Route>
             <Route path="/contador" element={<Contador />}></Route>
+            <Route path="/contador/:id" element={<Contador />}></Route>
             <Route path="/sobre" element={<Sobre />}></Route>
             <Route path="*" element={<Error />}></Route>
         </Routes>

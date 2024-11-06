@@ -211,7 +211,7 @@ export default function Disciplinas() {
                 <div className={styles.dline}></div>
                 <footer className={styles.dcard__footer}>
                   <h4>{d.cargaHoraria}Hr</h4>
-                  <Link to={"/contador"}>
+                  <Link to={`/contador/${d.id}`}>
                     <button className={styles.dbutton}>
                       Comece a Estudar!
                     </button>
