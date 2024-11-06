@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Login.module.css";
 import * as globalStyles from "../../styles/Global.module.css";
@@ -8,8 +8,14 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user";
 
 const Login = () => {
-  const { token, setToken } = useContext(UserContext);
+  const { token, setToken, message, setMessage } = useContext(UserContext);
   let navigate = useNavigate();
+
+  useEffect(() => {
+    if (message != "") {
+      setError(message);
+    }
+  }, []);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

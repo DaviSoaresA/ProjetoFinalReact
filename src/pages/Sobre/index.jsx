@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import * as styles from "./Sobre.module.css";
 import * as globalStyles from "../../styles/Global.module.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { UserContext } from "../../contexts/user";
 
 export default function Sobre() {
+  const { token, setToken, setMessage } = useContext(UserContext);
+
+  useEffect(() => {
+    setMessage("");
+  }, []);
+
   return (
     <div className="header-footer">
       <Header />
@@ -113,4 +120,3 @@ export default function Sobre() {
     </div>
   );
 }
-

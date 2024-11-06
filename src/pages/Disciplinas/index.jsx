@@ -10,7 +10,7 @@ import { UserContext } from "../../contexts/user";
 
 export default function Disciplinas() {
   let navigate = useNavigate();
-  const { token, setToken } = useContext(UserContext);
+  const { token, setToken, message, setMessage } = useContext(UserContext);
   const [id, setId] = useState(0);
 
   const [disciplinas, setDisciplinas] = useState([]);
@@ -40,6 +40,7 @@ export default function Disciplinas() {
 
   useEffect(() => {
     if (token == "") {
+      setMessage("Faça login para acessar as disciplinas");
       navigate("/login");
     } else {
       listarDisciplinas();

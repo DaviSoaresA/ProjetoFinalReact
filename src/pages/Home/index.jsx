@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import * as styles from "./Home.module.css";
 import * as globalStyles from "../../styles/Global.module.css";
 import "swiper/css";
@@ -11,7 +11,11 @@ import Footer from "../../components/Footer";
 import { UserContext } from "../../contexts/user";
 
 export default function Home() {
-  const { token, setToken } = useContext(UserContext);
+  const { token, setToken, setMessage } = useContext(UserContext);
+
+  useEffect(() => {
+    setMessage("");
+  }, []);
   const slidePerView = 1;
 
   const residencias = [
