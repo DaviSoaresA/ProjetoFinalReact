@@ -30,8 +30,17 @@
     padding: 0;
 }
 
-.dcard__header {
-    font-size: 1.2rem;
+.dcard__header button {
+    cursor: pointer;
+    background-color: firebrick;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 25%;
+}
+
+.dcard__header button:hover {
+    background-color: seagreen;
 }
 
 .dcard__footer,
