@@ -12,10 +12,6 @@ export default function Contador() {
 
   const { token, setToken, setMessage } = useContext(UserContext);
 
-  useEffect(() => {
-    setMessage("");
-  }, []);
-
   const { id } = useParams();
   const [disciplina, setDisciplina] = useState({});
 
@@ -27,12 +23,17 @@ export default function Contador() {
   useEffect(() => {
     if (id !== null) {
       axios
-        .get(`https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas/${id}`)
+        .get(`https://apireact-214173757800.herokuapp.com/disciplina/${id}`, {
+          headers: {
+            Authorization: token,
+          }
+          })
         .then((res) => {setDisciplina(res.data)})
         .catch((error) => console.error("Erro ao buscar a disciplina:", error))
     } else {
       setDisciplina(null);
     }
+    setMessage("");
   }, []);
 
   const formatTime = (time) => {
