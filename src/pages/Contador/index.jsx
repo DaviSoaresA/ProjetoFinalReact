@@ -129,7 +129,7 @@ export default function Contador() {
         {id && (
           <div>
             <p></p>
-            <h1 className={styles.title}>{disciplina.titulo}</h1>
+            <h1 className={styles.title}>{disciplina.nome}</h1>
             <h3 className={styles.subtitle}>Carga Horária: {disciplina.cargaHoraria}hr</h3>
             <p className={styles.paragraph}>{disciplina.descricao}</p>
           </div>
