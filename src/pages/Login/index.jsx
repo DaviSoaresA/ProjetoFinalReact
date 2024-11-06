@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./Login.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  let navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordC, setPasswordC] = useState("");
@@ -13,13 +16,15 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .post(`http://localhost:8080/login`, { email: email, password: password })
+      .post(`https://apireact-214173757800.herokuapp.com/login`, {
+        email: email,
+        password: password,
+      })
       .then((response) => {
         const token = response.headers["authorization"];
         // if (response.data.length > 0) {
-        alert("Login realizado com sucesso!");
         console.log(token);
-
+        navigate("/");
         setError("");
         // }
       })
@@ -37,7 +42,7 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8080/user", {
+      .post("https://apireact-214173757800.herokuapp.com/user", {
         email,
         senha: password,
         confirmaSenha: passwordC,
