@@ -3,29 +3,37 @@ import * as styles from "./Contador.module.css";
 import * as globalStyles from "../../styles/Global.module.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function Contador() {
+  const { id } = useParams();
+  const [disciplina, setDisciplina] = useState({});
+
   const [time, setTime] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
   const [mode, setMode] = useState("Pomodoro");
 
+  useEffect(() => {
+    if (id !== null) {
+      axios
+        .get(`https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas/${id}`)
+        .then((res) => {setDisciplina(res.data)})
+        .catch((error) => console.error("Erro ao buscar a disciplina:", error))
+    } else {
+      setDisciplina(null);
+    }
+  }, []);
 
-    
-    const formatTime = (time) => {
-      
-        const minutes = Math.floor(time / 60);
-        const seconds = time % 60; 
-        return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2,"0")}`;
-        
-    };
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2,"0")}`;
+  };
 
-
-
-  
   const startPomodoro = () => {
-    setTime(25 * 60); 
-    setMode("Pomodoro"); 
+    setTime(25 * 60);
+    setMode("Pomodoro");
     setIsActive(false);
   };
 
@@ -41,17 +49,14 @@ export default function Contador() {
     setIsActive(false);
   };
 
-  
   const startTimer = () => {
     setIsActive(true);
   };
 
-  
   const stopTimer = () => {
     setIsActive(false);
   };
 
- 
   const resetTimer = () => {
     setIsActive(false);
     if (mode === "Pomodoro") setTime(25 * 60);
@@ -59,20 +64,17 @@ export default function Contador() {
     else setTime(5 * 60);
   };
 
- 
   useEffect(() => {
     let interval = null;
     if (isActive && time > 0) {
-      
       interval = setInterval(() => {
         setTime((prevTime) => prevTime - 1);
       }, 1000);
     } else if (time === 0) {
-      
       clearInterval(interval);
       new Audio("/alert.mp3").play();
     }
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, [isActive, time]);
 
   return (
@@ -90,29 +92,37 @@ export default function Contador() {
         </p>
         <h2 className={styles.timer}>{formatTime(time)}</h2>
         <div className={styles.allButtonsContainer}>
-        <div className={styles.buttonGroup}>
-          <button onClick={startPomodoro} className={styles.button}>
-            Pomodoro
-          </button>
-          <button onClick={startLongBreak} className={styles.button}>
-            Long Break
-          </button>
-          <button onClick={startShortBreak} className={styles.button}>
-            Short Break
-          </button>
+          <div className={styles.buttonGroup}>
+            <button onClick={startPomodoro} className={styles.button}>
+              Pomodoro
+            </button>
+            <button onClick={startLongBreak} className={styles.button}>
+              Long Break
+            </button>
+            <button onClick={startShortBreak} className={styles.button}>
+              Short Break
+            </button>
+          </div>
+          <div className={styles.buttonGroup}>
+            <button onClick={startTimer} className={styles.start}>
+              Start
+            </button>
+            <button onClick={stopTimer} className={styles.stop}>
+              Stop
+            </button>
+            <button onClick={resetTimer} className={styles.reset}>
+              Reset
+            </button>
+          </div>
         </div>
-        <div className={styles.buttonGroup}>
-          <button onClick={startTimer} className={styles.start}>
-            Start
-          </button>
-          <button onClick={stopTimer} className={styles.stop}>
-            Stop
-          </button>
-          <button onClick={resetTimer} className={styles.reset}>
-            Reset
-          </button>
-        </div>
-      </div>
+        {id && (
+          <div>
+            <p></p>
+            <h1 className={styles.title}>{disciplina.titulo}</h1>
+            <h3 className={styles.subtitle}>Carga Horária: {disciplina.cargaHoraria}hr</h3>
+            <p className={styles.paragraph}>{disciplina.descricao}</p>
+          </div>
+        )}
       </div>
       <Footer />
     </div>
