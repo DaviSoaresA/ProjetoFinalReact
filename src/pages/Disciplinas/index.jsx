@@ -4,12 +4,13 @@ import Footer from "../../components/Footer";
 import * as styles from "./Disciplinas.module.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as globalStyles from "../../styles/Global.module.css";
 import { UserContext } from "../../contexts/user";
 
 export default function Disciplinas() {
-  const { token, setToken } = useContext(UserContext);
+  let navigate = useNavigate();
+  const { token, setToken, message, setMessage } = useContext(UserContext);
   const [id, setId] = useState(0);
 
   const [disciplinas, setDisciplinas] = useState([]);
@@ -38,7 +39,10 @@ export default function Disciplinas() {
   };
 
   useEffect(() => {
-    if (token) {
+    if (token == "") {
+      setMessage("Faça login para acessar as disciplinas");
+      navigate("/login");
+    } else {
       listarDisciplinas();
     }
   }, [token]);

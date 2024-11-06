@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as styles from "./Contador.module.css";
 import * as globalStyles from "../../styles/Global.module.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../../contexts/user";
+
 
 export default function Contador() {
+
+  const { token, setToken, setMessage } = useContext(UserContext);
+
+  useEffect(() => {
+    setMessage("");
+  }, []);
+
   const { id } = useParams();
   const [disciplina, setDisciplina] = useState({});
+
 
   const [time, setTime] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
