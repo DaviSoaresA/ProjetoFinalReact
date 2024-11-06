@@ -4,29 +4,29 @@ import * as globalStyles from "../../styles/Global.module.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
-//States - estados do contador
+
 export default function Contador() {
-  const [time, setTime] = useState(25 * 60); // armazena o tempo iniciando em 25 minutos
-  const [isActive, setIsActive] = useState(false); //controla se o temporiador está ativo inciando em false
-  const [mode, setMode] = useState("Pomodoro"); // indica o modo atual do temporizador entre as 3 possibilidades
+  const [time, setTime] = useState(25 * 60);
+  const [isActive, setIsActive] = useState(false);
+  const [mode, setMode] = useState("Pomodoro");
 
 
-    // função para formatar o tempo
+    
     const formatTime = (time) => {
-        // Formato MM:ss
-        const minutes = Math.floor(time / 60); //retorna o maior inteiro menor que o argumento, no caso, minutos.
-        const seconds = time % 60; //calcula o resto da divisãopara para os segundos
+      
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60; 
         return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2,"0")}`;
-        //padStart formata minutos e segundos sempre com dois dígitos e arrendonda para 0
+        
     };
 
 
 
-  // funções que definem cada modo de contador
+  
   const startPomodoro = () => {
-    setTime(25 * 60); //ajusta o tempo de início da contagem
-    setMode("Pomodoro"); //atualiza a contagem
-    setIsActive(false); //pausa quando ativado - botão stop
+    setTime(25 * 60); 
+    setMode("Pomodoro"); 
+    setIsActive(false);
   };
 
   const startLongBreak = () => {
@@ -41,17 +41,17 @@ export default function Contador() {
     setIsActive(false);
   };
 
-  // função que inicia a contagem
+  
   const startTimer = () => {
     setIsActive(true);
   };
 
-  // inverso
+  
   const stopTimer = () => {
     setIsActive(false);
   };
 
-  // função reset
+ 
   const resetTimer = () => {
     setIsActive(false);
     if (mode === "Pomodoro") setTime(25 * 60);
@@ -59,20 +59,20 @@ export default function Contador() {
     else setTime(5 * 60);
   };
 
-  // Contagem regressiva
+ 
   useEffect(() => {
     let interval = null;
     if (isActive && time > 0) {
-      //se o temporizador está a tivo e for maior que zero, diminui um segundo
+      
       interval = setInterval(() => {
         setTime((prevTime) => prevTime - 1);
       }, 1000);
     } else if (time === 0) {
-      // quando chegar em zero interrompe a cotagem e emite o som
+      
       clearInterval(interval);
       new Audio("/alert.mp3").play();
     }
-    return () => clearInterval(interval); //limpa o contador
+    return () => clearInterval(interval); 
   }, [isActive, time]);
 
   return (
