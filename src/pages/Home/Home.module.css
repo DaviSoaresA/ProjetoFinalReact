@@ -1,33 +1,20 @@
-.container {
-    width: 68%;
-    margin: 0 auto;
-    padding: 20px 8%;
-}
-
 .home {
+    margin-top: 30px;
     display: flex;
     align-items: center;
-    justify-content: space-between; 
-    margin-top: 5%;
-    margin-bottom: 40px;
+    justify-content: space-between;
     position: relative;
+    width: 100%;
 }
 
-.titulosHome {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 50%;
-}
-
-.titulo {
-    font-size: 2.6rem;
-    text-align: left;
+.title {
+    font-size: 4vw;
     color: #000000;
+    margin-top: 0;
 }
 
-.bannerFoto {
-    max-width: 330px;
+.bannerPic {
+    max-width: 40%;
     height: auto;
     margin-left: 20px;
     margin-top: 20px;
@@ -45,15 +32,15 @@
     z-index: 1;
 }
 
-.tituloUm, .tituloDois, .tituloTres {
+.titleOne, .titleTwo, .titleThree {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.8rem;
     color: #000000;
     text-align: center;
-    margin-bottom: 15px;
+    margin-top: 50px;
 }
 
-.subtitulo {
+.subtitle {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2rem;
     color: #000000;
@@ -61,14 +48,14 @@
     margin-bottom: 15px;
 }
 
-.texto {
+.paragraph {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: lighter;
     text-align: justify;
     line-height: 1.5;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     color: #000000;
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 
 .slideSection {
@@ -77,7 +64,7 @@
 }
 
 .swiperContainer {
-    width: 70%;
+    width: 65%;
     margin: 0 auto;
     position: relative;
 }
@@ -90,7 +77,7 @@
     object-fit: cover;
 }
 
-.legenda {
+.caption {
     position: absolute;
     bottom: 10px;
     left: 50%;
@@ -103,7 +90,7 @@
     transform: translateX(-50%);
 }
 
-.objetivo {
+.goal {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: justify;
@@ -113,17 +100,17 @@
     margin-bottom: 0;
 }
 
-.descricao {
+.description {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: lighter;
     text-align: justify;
     line-height: 1.5;
     font-size: 1.0rem;
     color: #000000;
-    margin-top: 0;
-}
+    margin: 5px 0;
+    }
 
-.descricaoFinal{
+.finalDescription{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: regular;
     text-align: center;
@@ -133,30 +120,41 @@
     background-color: steelblue;
     color: white;
     padding: 20px;
-    margin: 20px 0;
-    border-radius: 0px 50px 0px 20px;
+    margin: 30px 0 0 0;
+    border-radius: 0px 50px 0px 30px;
 }
 
-.home, .introducao, .slideSection, .diferenciais {
-    margin-top: 40px;
-}
-
-@media screen and (max-width:1170px) {
+@media screen and (max-width:800px) {
     .home {
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
-    .bannerFoto, .shape {
+    .bannerPic, .shape {
         display: none;
     }
 
-    .textosHome {
+    .textsHome {
         width: 100%;
     }
 
-    .tituloUm, .tituloDois, .tituloTres, .subtitulo {
+    .titleOne, .titleTwo, .titleThree, .subtitle {
         text-align: center;
     }
+}
+
+@media (max-width: 799px) {
+    .title {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    .slideItem {
+        width: 100%;
+        max-width: 650px;
+        height: 200px;
+        display: block;
+        margin: 0 auto;
+        object-fit: cover;
+    }    
 }
