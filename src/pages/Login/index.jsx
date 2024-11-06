@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import styles from "./Login.module.css";
 import * as globalStyles from "../../styles/Global.module.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/user";
 
 const Login = () => {
+  const { token, setToken } = useContext(UserContext);
   let navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -24,12 +26,9 @@ const Login = () => {
         password: password,
       })
       .then((response) => {
-        const token = response.headers["authorization"];
-        // if (response.data.length > 0) {
-        console.log(token);
-        navigate("/");
+        setToken(response.headers["authorization"]);
+        navigate("/disciplinas");
         setError("");
-        // }
       })
       .catch((err) => {
         if (err.response && err.response.status === 401) {

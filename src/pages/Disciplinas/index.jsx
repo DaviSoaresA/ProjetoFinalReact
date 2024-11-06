@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import * as styles from "./Disciplinas.module.css";
@@ -6,8 +6,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import * as globalStyles from "../../styles/Global.module.css";
+import { UserContext } from "../../contexts/user";
 
 export default function Disciplinas() {
+  const { token, setToken } = useContext(UserContext);
   const [id, setId] = useState(0);
 
   const [disciplinas, setDisciplinas] = useState([]);
@@ -26,7 +28,7 @@ export default function Disciplinas() {
     axios
       .get("https://apireact-214173757800.herokuapp.com/disciplina", {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYWJAdGVzdGUuY29tIiwiZXhwIjoxNzMwOTQ4MTk3fQ.K59HHGDbkOw20BAqdDHPqqkS95xk63rmk1XtiORjEng`,
+          Authorization: token,
         },
       })
       .then((res) => {
@@ -36,14 +38,16 @@ export default function Disciplinas() {
   };
 
   useEffect(() => {
-    listarDisciplinas();
-  }, []);
+    if (token) {
+      listarDisciplinas();
+    }
+  }, [token]);
 
   const addDisc = (data) => {
     axios
       .post("https://apireact-214173757800.herokuapp.com/disciplina", data, {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYWJAdGVzdGUuY29tIiwiZXhwIjoxNzMwOTQ4MTk3fQ.K59HHGDbkOw20BAqdDHPqqkS95xk63rmk1XtiORjEng`,
+          Authorization: token,
         },
       })
       .then(() => {
@@ -51,14 +55,16 @@ export default function Disciplinas() {
         setExistDisc(true);
         listarDisciplinas();
       })
-      .catch(console.error("Erro no Post"));
+      .catch((error) => {
+        console.error("Erro na requisição", error);
+      });
   };
 
   const apagarDisc = (id) => {
     axios
       .delete(`https://apireact-214173757800.herokuapp.com/disciplina/${id}`, {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYWJAdGVzdGUuY29tIiwiZXhwIjoxNzMwOTQ4MTk3fQ.K59HHGDbkOw20BAqdDHPqqkS95xk63rmk1XtiORjEng`,
+          Authorization: token,
         },
       })
       .then(() => {
@@ -74,7 +80,7 @@ export default function Disciplinas() {
         data,
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYWJAdGVzdGUuY29tIiwiZXhwIjoxNzMwOTQ4MTk3fQ.K59HHGDbkOw20BAqdDHPqqkS95xk63rmk1XtiORjEng`,
+            Authorization: token,
           },
         }
       )

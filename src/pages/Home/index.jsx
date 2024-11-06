@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as styles from "./Home.module.css";
 import * as globalStyles from "../../styles/Global.module.css";
 import "swiper/css";
@@ -8,8 +8,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { UserContext } from "../../contexts/user";
 
 export default function Home() {
+  const { token, setToken } = useContext(UserContext);
   const slidePerView = 1;
 
   const residencias = [
