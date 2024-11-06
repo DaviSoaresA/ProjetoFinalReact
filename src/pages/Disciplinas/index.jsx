@@ -106,7 +106,7 @@ export default function Disciplinas() {
           <button
             className={styles.dbutton}
             onClick={() => {
-              setAdd(false), setEdit(false), setExistDisc(true);
+              setAdd(false), setEdit(false), setExistDisc(true), setSelectDelete(false), setSelectEdit(false); 
             }}
           >
             Disciplinas Existentes
@@ -114,20 +114,20 @@ export default function Disciplinas() {
           <button
             className={styles.dbutton}
             onClick={() => {
-              setAdd(true), setExistDisc(false), selectEdit(false);
+              setAdd(true), setExistDisc(false), selectEdit(false), setSelectDelete(false), setSelectEdit(false);
             }}
           >
             Adicionar Disciplinas
           </button>
           <button
             className={styles.dbutton}
-            onClick={() => setSelectEdit(true)}
+            onClick={() => {setSelectEdit(!selectEdit), setSelectDelete(false)}}
           >
             Editar Disciplina
           </button>
           <button
             className={styles.dbutton}
-            onClick={() => setSelectDelete(true)}
+            onClick={() => {setSelectDelete(!selectDelete), setSelectEdit(false)}}
           >
             Apagar Disciplina
           </button>
@@ -237,18 +237,10 @@ export default function Disciplinas() {
                 <header className={styles.dcard__header}>
                   <h2>{d.nome}</h2>
                   {selectEdit && (
-                    <input
-                      type="button"
-                      onClick={() => {
-                        setEdit(true),
-                          setAdd(false),
-                          setExistDisc(false),
-                          setId(d.id);
-                      }}
-                    />
+                    <button onClick={() => {setEdit(true), setAdd(false), setExistDisc(false), setId(d.id)}}></button>
                   )}
                   {selectDelete && (
-                    <input type="button" onClick={() => apagarDisc(d.id)} />
+                    <button onClick={() => apagarDisc(d.id)}></button>
                   )}
                 </header>
                 <div className={styles.dline}></div>
@@ -258,7 +250,7 @@ export default function Disciplinas() {
                 <div className={styles.dline}></div>
                 <footer className={styles.dcard__footer}>
                   <h4>{d.cargaHoraria}Hr</h4>
-                  <Link to={"/contador"}>
+                  <Link to={`/contador/${d.id}`}>
                     <button className={styles.dbutton}>
                       Comece a Estudar!
                     </button>
