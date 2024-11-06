@@ -198,10 +198,10 @@ export default function Disciplinas() {
                 <header className={styles.dcard__header}>
                   <h2>{d.titulo}</h2>
                   {selectEdit && (
-                    <input type="button" onClick={() => {setEdit(true), setAdd(false), setExistDisc(false), setId(d.id)}}/>
+                    <button onClick={() => {setEdit(true), setAdd(false), setExistDisc(false), setId(d.id)}}></button>
                   )}
                   {selectDelete && (
-                    <input type="button" onClick={() => apagarDisc(d.id)}/>
+                    <button onClick={() => apagarDisc(d.id)}></button>
                   )}
                 </header>
                 <div className={styles.dline}></div>
