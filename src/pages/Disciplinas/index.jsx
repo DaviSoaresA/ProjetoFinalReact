@@ -5,11 +5,17 @@ import * as styles from "./Disciplinas.module.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import * as globalStyles from "../../styles/Global.module.css"
+import * as globalStyles from "../../styles/Global.module.css";
 
 export default function Disciplinas() {
+  const [id, setId] = useState(0);
+
   const [disciplinas, setDisciplinas] = useState([]);
-  const [disc, setDisc] = useState(true);
+  const [selectEdit, setSelectEdit] = useState(false);
+  const [selectDelete, setSelectDelete] = useState(false);
+  const [existDisc, setExistDisc] = useState(true);
+  const [add, setAdd] = useState(false);
+  const [edit, setEdit] = useState(false);
   const {
     register,
     handleSubmit,
@@ -29,14 +35,40 @@ export default function Disciplinas() {
     listarDisciplinas();
   }, []);
 
-  const addPost = (data) => {
+  const addDisc = (data) => {
     axios
       .post("https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas", data)
       .then(() => {
-        setDisc(true);
+        setAdd(false);
+        setExistDisc(true);
         listarDisciplinas();
       })
       .catch(console.error("Erro no Post"));
+  };
+
+  const apagarDisc = (id) => {
+    axios
+      .delete(`https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas/${id}`)
+      .then(() => {
+        setSelectDelete(false);
+        listarDisciplinas();
+      });
+  };
+
+  const editDisc = (data) => {
+    axios
+      .put(
+        `https://672921086d5fa4901b6c3fb2.mockapi.io/Disciplinas/${id}`,
+        data
+      )
+      .then(() => {
+        setExistDisc(true);
+        setAdd(false);
+        setEdit(false);
+        setSelectEdit(false);
+        listarDisciplinas();
+      })
+      .catch(() => console.error("Erro no put"));
   };
 
   return (
@@ -44,16 +76,78 @@ export default function Disciplinas() {
       <Header />
       <div className={globalStyles.container}>
         <div className={styles.buttonArea}>
-          <button className={styles.dbutton} onClick={() => setDisc(true)}>
+          <button className={styles.dbutton} onClick={() => {setAdd(false), setEdit(false), setExistDisc(true)}}>
             Disciplinas Existentes
           </button>
-          <button className={styles.dbutton} onClick={() => setDisc(false)}>
+          <button className={styles.dbutton} onClick={() => {setAdd(true), setExistDisc(false), selectEdit(false)}}>
             Adicionar Disciplinas
           </button>
+          <button
+            className={styles.dbutton}
+            onClick={() => setSelectEdit(true)}
+          >
+            Editar Disciplina
+          </button>
+          <button
+            className={styles.dbutton}
+            onClick={() => setSelectDelete(true)}
+          >
+            Apagar Disciplina
+          </button>
         </div>
-        {!disc && (
+
+        {!add && edit && !existDisc && (
           <main className={styles.dmain}>
-            <form className={styles.dform} onSubmit={handleSubmit(addPost)}>
+            <form className={styles.dform} onSubmit={handleSubmit(editDisc)}>
+              <header className={styles.dfheader}>
+                <h1>Edite a Disciplina: </h1>
+              </header>
+              <div className={styles.dlineTwo}></div>
+              <div className={styles.dfField}>
+                <label htmlFor="titulo">Título da Disciplina:</label>
+                <input
+                  type="text"
+                  name="titulo"
+                  id="titulo"
+                  maxLength="100"
+                  defaultValue={(disciplinas.find((d) => d.id === id).titulo)}
+                  {...register("titulo")}
+                />
+              </div>
+              <div className={styles.dfField}>
+                <label htmlFor="descricao">Descrição da Disciplina:</label>
+                <input
+                  type="text"
+                  name="descricao"
+                  id="descricao"
+                  maxLength="200"
+                  defaultValue={(disciplinas.find((d) => d.id === id).descricao)}
+                  {...register("descricao")}
+                />
+              </div>
+              <div className={styles.dfField}>
+                <label htmlFor="cargaHoraria">
+                  Carga horária da Disciplina:
+                </label>
+                <input
+                  type="number"
+                  name="cargaHoraria"
+                  id="cargaHoraria"
+                  maxLength="10"
+                  defaultValue={(disciplinas.find((d) => d.id === id).cargaHoraria)}
+                  {...register("cargaHoraria")}
+                />
+              </div>
+              <button type="submit" className={styles.dbutton}>
+                Editar
+              </button>
+            </form>
+          </main>
+        )}
+
+        {add && !edit && !existDisc && (
+          <main className={styles.dmain}>
+            <form className={styles.dform} onSubmit={handleSubmit(addDisc)}>
               <header className={styles.dfheader}>
                 <h1>Adicione uma nova Disciplina: </h1>
               </header>
@@ -97,12 +191,18 @@ export default function Disciplinas() {
           </main>
         )}
 
-        {disc && (
+        {!add && existDisc && !edit && (
           <main className={styles.dmain}>
             {disciplinas.map((d, key) => (
               <div className={styles.dcard} key={key}>
                 <header className={styles.dcard__header}>
                   <h2>{d.titulo}</h2>
+                  {selectEdit && (
+                    <input type="button" onClick={() => {setEdit(true), setAdd(false), setExistDisc(false), setId(d.id)}}/>
+                  )}
+                  {selectDelete && (
+                    <input type="button" onClick={() => apagarDisc(d.id)}/>
+                  )}
                 </header>
                 <div className={styles.dline}></div>
                 <div className={styles.dcard__main}>
